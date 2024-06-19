@@ -18,8 +18,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from usuarios import views as usuarios_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
+    path('login/', usuarios_views.iniciar_sesion, name='login'),
+    path('registro/', usuarios_views.registrarse, name='registro'),
+    path('panel/', usuarios_views.panel, name='panel'),
 ]
