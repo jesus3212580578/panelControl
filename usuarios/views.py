@@ -1,8 +1,7 @@
-# En usuarios/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, RegistroForm
+from django.contrib import messages  # Importar el módulo de mensajes
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -25,7 +24,10 @@ def registrarse(request):
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
+            messages.success(request, 'Registro exitoso. Por favor, inicia sesión.')
             return redirect('login')
+        else:
+            messages.error(request, 'Corrige los errores del formulario.')
     else:
         form = RegistroForm()
     return render(request, 'usuarios/registro.html', {'form': form})
