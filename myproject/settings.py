@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'usuarios',
+    'channels',
 ]
+
+# Definir el backend de canal de capa
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
+
+# Definir el tipo de enrutador de ASGI
+ASGI_APPLICATION = 'myproject.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'paneldecontrol',
         'USER': 'root',
-        'PASSWORD': '2002',
+        'PASSWORD': 'root',
         'HOST': 'localhost',  # Cambia según la configuración de tu MySQL
         'PORT': '3306',       # Puerto de MySQL
     }

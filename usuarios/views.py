@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, RegistroForm
 from django.contrib import messages  # Importar el módulo de mensajes
@@ -11,7 +12,6 @@ def iniciar_sesion(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=correo, password=password)
             if user is not None:
-                login(request, user)
                 return redirect('panel')
             else:
                 return render(request, 'usuarios/login.html', {'form': form, 'error': 'Credenciales inválidas.'})
@@ -32,5 +32,6 @@ def registrarse(request):
         form = RegistroForm()
     return render(request, 'usuarios/registro.html', {'form': form})
 
+@login_required
 def panel(request):
-    return render(request, 'usuarios/panel.html')
+    return render(request, 'usuarios/panel.html', {'user': request.user})
