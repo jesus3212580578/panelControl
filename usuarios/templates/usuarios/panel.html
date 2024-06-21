@@ -14,10 +14,11 @@
     
     <div class="container">
         <h1 class="my-4 text-center">Panel de Control de Tareas</h1>
-        
+        <!-- Agrega un elemento HTML con el nombre de usuario como atributo data -->
+    <div id="username" data-username="{{ user }}"></div>
         <div class="card mb-4">
             <div class="card-header">
-                Crear Tarea
+                {{user}} Crea una Tarea
             </div>
             <div class="card-body">
                 <form id="task-form">
